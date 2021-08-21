@@ -1,8 +1,10 @@
 """Models for Playlist app."""
 
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 
 db = SQLAlchemy()
+bcrypt = Bcrypt()
 
 
 class Playlist(db.Model):
@@ -29,7 +31,6 @@ class Song(db.Model):
     title = db.Column(db.String, nullable=False)
     artist = db.Column(db.String, nullable=False)
 
-    # tracks = db.relationship("PlaylistSong", backref="song")
     album = db.relationship("Playlist", secondary="playlists_songs", backref='songs')
 
     def __repr__(self):
